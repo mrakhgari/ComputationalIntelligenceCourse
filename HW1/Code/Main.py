@@ -25,5 +25,16 @@ def read_data():
         return df[df.columns[0:2]], df[df.columns[2]]  # return x and y.
 
 
-print(init_one_layer_model(2, 1, 2)['W1'].T)
-print(read_data())
+# Calculate the derivative of an neuron output
+def transfer_derivative(sigmoid):
+    return sigmoid * (1.0 - sigmoid)
+
+
+# sigmoid function
+def sigmoid_function(x):
+    return 1 / (1 + np.exp(-x))
+
+
+# print(init_one_layer_model(2, 1, 2)['W1'].T)
+# print(read_data())
+print(sigmoid_function(0))
