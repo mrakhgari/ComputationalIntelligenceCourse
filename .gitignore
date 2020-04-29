@@ -210,3 +210,4 @@ dmypy.json
 # custom edits 
 # for word files
 *.docx
+*.bas
