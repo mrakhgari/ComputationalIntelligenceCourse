@@ -7,7 +7,7 @@ from csv import reader
 
 
 # initialize a model
-def init_one_layer_model(input_size, hidden_size, output_size):
+def init_one_layer_model(input_size, hidden_size):
     model = {}
     # normal distribution for w
     model['W1'] = 0.0001 * np.random.randn(input_size, hidden_size)
@@ -35,6 +35,6 @@ def sigmoid_function(x):
     return 1 / (1 + np.exp(-x))
 
 
-# print(init_one_layer_model(2, 1, 2)['W1'].T)
+print(init_one_layer_model(2, 1)['W1'].T)
 # print(read_data())
 print(sigmoid_function(0))
