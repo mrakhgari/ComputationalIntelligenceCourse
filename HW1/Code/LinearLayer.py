@@ -1,5 +1,4 @@
 import numpy as np  # import numpy library
-# import function to initialize weights and biases
 from utils import init_one_layer_model
 
 
@@ -22,9 +21,10 @@ class LinearLayer:
         self.example_size = input_shape[1]
         # `params` store weights and bias in a python dictionary
         self.params = init_one_layer_model(input_shape[0], n_out)
-        # print(self.params['W1'])
         # create space for resultant Z output
         self.Z = np.zeros((self.params['W1'].shape[0], input_shape[1]))
+        self.dW = 0
+        self.db = 0
 
     def forward(self, pervious):
         """
@@ -35,6 +35,15 @@ class LinearLayer:
 
         self.pervious = pervious
         self.Z = np.dot(self.params['W1'], self.pervious) + self.params['b1']
+        self.sigmoid()
+
+    def sigmoid(self):
+        """
+        This function performs the forwards propagation step through the activation function
+        Args:
+            Z: input from previous (linear) layer
+        """
+        self.Z = 1 / (1 + np.exp(-self.Z))
 
     def backward(self, upstream_grad):
         """"
@@ -43,9 +52,9 @@ class LinearLayer:
            upstream_grad: gradient coming in from the upper layer to couple with local gradient
         """
 
-        self.dW = np.dot(upstream_grad, self.pervious.T)
+        self.dW += np.dot(upstream_grad, self.pervious.T)
 
-        self.db = np.sum(upstream_grad, axis=1, keepdims=True)
+        self.db += np.sum(upstream_grad, axis=1, keepdims=True)
 
         self.dPervious = np.dot(self.params['W1'].T, upstream_grad)
 

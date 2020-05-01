@@ -13,9 +13,10 @@ def compute_bce_cost(Y, P_hat):
     Returns:
         cost: The Binary Cross-Entropy Cost result
         dP_hat: gradient of Cost w.r.t P_hat
+        accuracy_rate: Shows the accuracy of the program
     """
 
-    m = len(Y[0])
+    m = len(Y)
     for i in range(P_hat.shape[0]):
         for j in range(P_hat.shape[1]):
             if P_hat[i][j] == 1:
@@ -27,7 +28,5 @@ def compute_bce_cost(Y, P_hat):
     cost = -1 * np.sum(Y * np.log(P_hat) + (1-Y) * np.log(1-P_hat))
     # remove extraneous dimensions to give just a scalar (e.g. this turns [[17]] into 17)
     cost = np.squeeze(cost)
-    dP_hat = (-1) * ((Y/P_hat) + ((1-Y)/(1-P_hat)))
-    print(d)
-    print(Y)
-    return cost, dP_hat, np.sum(d == Y[0]) / m
+    dP_hat = (- Y + P_hat)
+    return cost, dP_hat, np.sum(d == Y) / m
