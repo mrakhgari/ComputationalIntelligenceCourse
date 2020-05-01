@@ -1,6 +1,6 @@
 import matplotlib.pyplot as plt
 import matplotlib
-
+import numpy as np
 
 def create_plot(X_data, Y_data):
     """

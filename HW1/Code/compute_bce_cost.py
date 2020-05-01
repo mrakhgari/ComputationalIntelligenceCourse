@@ -29,4 +29,4 @@ def compute_bce_cost(Y, P_hat):
     # remove extraneous dimensions to give just a scalar (e.g. this turns [[17]] into 17)
     cost = np.squeeze(cost)
     dP_hat = (- Y + P_hat)
-    return cost, dP_hat, np.sum(d == Y) / m
+    return cost, dP_hat, np.sum(d == Y) / m , d
