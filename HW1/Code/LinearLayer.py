@@ -1,6 +1,6 @@
 import numpy as np  # import numpy library
 # import function to initialize weights and biases
-from Main import init_one_layer_model
+from utils import init_one_layer_model
 
 
 class LinearLayer:
@@ -22,8 +22,9 @@ class LinearLayer:
         self.example_size = input_shape[1]
         # `params` store weights and bias in a python dictionary
         self.params = init_one_layer_model(input_shape[0], n_out)
+        # print(self.params['W1'])
         # create space for resultant Z output
-        self.Z = np.zeros((self.params['W'].shape[0], input_shape[1]))
+        self.Z = np.zeros((self.params['W1'].shape[0], input_shape[1]))
 
     def forward(self, pervious):
         """
@@ -55,5 +56,5 @@ class LinearLayer:
             learning_rate: learning rate hyper-param for gradient descent
         """
 
-        self.params['W1'] -= learning_rate * self.dW
-        self.params['b1'] -= learning_rate * self.db
+        self.params['W1'] -= (learning_rate * self.dW) / self.example_size
+        self.params['b1'] -= (learning_rate * self.db) / self.example_size
