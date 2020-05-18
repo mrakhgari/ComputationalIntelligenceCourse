@@ -25,6 +25,7 @@ class LinearLayer:
         self.Z = np.zeros((self.params['W1'].shape[0], input_shape[1]))
         self.dW = 0
         self.db = 0
+        self.dPervious = 0
 
     def forward(self, pervious):
         """
@@ -56,7 +57,8 @@ class LinearLayer:
 
         self.db += np.sum(upstream_grad, axis=1, keepdims=True)
 
-        self.dPervious = np.dot(self.params['W1'].T, upstream_grad)
+        self.dPervious = np.dot(
+            self.params['W1'].T, upstream_grad) * self.Z * (1-self.Z)
 
     def update_params(self, learning_rate):
         """

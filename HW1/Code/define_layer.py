@@ -7,7 +7,7 @@ import random
 from plot import create_plot
 
 learning_rate = 1.2
-number_of_epochs = 100
+number_of_epochs = 10
 
 # np.random.seed(48)  # set seed value so that the results are reproduceable
 # (weights will now be initailzaed to the same pseudo-random numbers, each time)
