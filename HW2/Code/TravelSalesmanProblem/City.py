@@ -6,7 +6,8 @@ class City:
         each city in this problem saved in this class with (x,y) coordinate.
     '''
 
-    def __init__(self, x=0, y=0):
+    def __init__(self, index, x=0, y=0):
+        self.index = index
         self.x = x
         self.y = y
 
@@ -14,9 +15,9 @@ class City:
         self.__str__()
 
     def __str__(self):
-        return '(' + self.x + ', ' + self.y + ')'
+        return str(self.index) + '-> (' + str(self.x) + ', ' + str(self.y) + ')'
 
+    # calculate distance of another city with this city
 
-    ## calculate distance of another city with this city
     def distance(self, other):
-        math.sqrt((other.x - self.x)**2 + (other.y - self.y)**2)
+        return math.sqrt((other.x - self.x)**2 + (other.y - self.y)**2)
