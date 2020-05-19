@@ -1,4 +1,6 @@
 import random
+from Fittness import Fitness
+import operator
 
 
 class genetic:
@@ -25,7 +27,10 @@ class genetic:
         return next_population
 
     def rank_path(self, current_population):
-        pass
+        results = {}
+        for index, path in enumerate(current_population):
+            results[index] = Fitness(path).getFitness()
+        return sorted(results.items(), key=operator.itemgetter(1), reverse=True)
 
     def selection(self, population_raked, elite_size):
         pass
