@@ -1,6 +1,7 @@
 import random
 from Fittness import Fitness
 import operator
+import numpy as np
 
 
 class genetic:
@@ -30,10 +31,13 @@ class genetic:
         results = {}
         for index, path in enumerate(current_population):
             results[index] = Fitness(path).getFitness()
-        return sorted(results.items(), key=operator.itemgetter(1), reverse=True)
+        return dict(sorted(results.items(), key=operator.itemgetter(1), reverse=True))
 
     def selection(self, population_raked, elite_size):
-        pass
+        fitness_sum = sum(population_raked.values())
+        probabilities = np.array(
+            [population_raked[fitness] / fitness_sum for fitness in population_raked])
+        return np.random.choice(sorted(list(population_raked.keys())), len(population_raked), p=probabilities).tolist()
 
     def mating_pool(self, current_population, selection_results):
         pass
